@@ -1,0 +1,119 @@
+<!--
+T1机器人MuJoCo模型定义
+这是一个简化的双足机器人模型
+实际使用时应替换为真实的T1机器人模型
+-->
+
+<mujoco model="t1_robot">
+  <compiler angle="degree" coordinate="local" inertiafromgeom="true"/>
+
+  <option timestep="0.002" gravity="0 0 -9.81">
+    <flag warmstart="enable"/>
+  </option>
+
+  <default>
+    <joint damping="1" armature="0.01"/>
+    <geom contype="1" conaffinity="1" condim="3" friction="1.0 0.005 0.0001" rgba="0.8 0.6 0.4 1"/>
+    <motor ctrlrange="-1 1" ctrllimited="true"/>
+  </default>
+
+  <asset>
+    <texture type="skybox" builtin="gradient" rgb1="0.3 0.5 0.7" rgb2="0 0 0" width="512" height="512"/>
+    <texture name="texplane" type="2d" builtin="checker" rgb1="0.2 0.3 0.4" rgb2="0.1 0.2 0.3" width="512" height="512" mark="cross" markrgb="1 1 1"/>
+    <material name="matplane" reflectance="0.3" texture="texplane" texrepeat="1 1" texuniform="true"/>
+  </asset>
+
+  <worldbody>
+    <!-- 地面 -->
+    <light directional="true" diffuse="0.6 0.6 0.6" specular="0.2 0.2 0.2" pos="0 0 4" dir="0 0 -1"/>
+    <geom name="floor" pos="0 0 0" size="0 0 0.05" type="plane" material="matplane" condim="3"/>
+
+    <!-- 机器人基座（躯干） -->
+    <body name="torso" pos="0 0 0.5">
+      <camera name="track" mode="trackcom" pos="0 -3 1" xyaxes="1 0 0 0 0.3 1"/>
+      <freejoint name="root"/>
+      <site name="torso" pos="0 0 0"/>
+
+      <!-- 躯干几何体 -->
+      <geom name="torso_geom" type="box" size="0.15 0.1 0.2" rgba="0.7 0.7 0.9 1"/>
+      <geom name="torso_imu" type="box" size="0.05 0.05 0.05" pos="0 0 0.15" rgba="0.9 0.2 0.2 1"/>
+
+      <!-- 左髋关节 -->
+      <body name="left_hip" pos="0 0.1 -0.1">
+        <joint name="left_hip_yaw" type="hinge" axis="0 0 1" range="-45 45" damping="2"/>
+        <geom name="left_hip_geom" type="capsule" size="0.04" fromto="0 0 0 0 0.05 0" rgba="0.5 0.5 0.9 1"/>
+
+        <body name="left_thigh" pos="0 0.05 0">
+          <joint name="left_hip_roll" type="hinge" axis="1 0 0" range="-30 90" damping="2"/>
+          <joint name="left_hip_pitch" type="hinge" axis="0 1 0" range="-120 60" damping="2"/>
+          <geom name="left_thigh_geom" type="capsule" size="0.05" fromto="0 0 0 0 0 -0.3" rgba="0.5 0.5 0.9 1"/>
+
+          <!-- 左膝关节 -->
+          <body name="left_shin" pos="0 0 -0.3">
+            <joint name="left_knee" type="hinge" axis="0 1 0" range="-150 0" damping="1.5"/>
+            <geom name="left_shin_geom" type="capsule" size="0.04" fromto="0 0 0 0 0 -0.3" rgba="0.5 0.5 0.9 1"/>
+
+            <!-- 左踝关节 -->
+            <body name="left_foot" pos="0 0 -0.3">
+              <joint name="left_ankle_pitch" type="hinge" axis="0 1 0" range="-45 45" damping="1"/>
+              <joint name="left_ankle_roll" type="hinge" axis="1 0 0" range="-20 20" damping="1"/>
+              <geom name="left_foot_geom" type="box" size="0.08 0.04 0.02" pos="0.03 0 -0.02" rgba="0.3 0.3 0.7 1" friction="1.2 0.005 0.0001"/>
+            </body>
+          </body>
+        </body>
+      </body>
+
+      <!-- 右髋关节（对称结构） -->
+      <body name="right_hip" pos="0 -0.1 -0.1">
+        <joint name="right_hip_yaw" type="hinge" axis="0 0 1" range="-45 45" damping="2"/>
+        <geom name="right_hip_geom" type="capsule" size="0.04" fromto="0 0 0 0 -0.05 0" rgba="0.9 0.5 0.5 1"/>
+
+        <body name="right_thigh" pos="0 -0.05 0">
+          <joint name="right_hip_roll" type="hinge" axis="1 0 0" range="-90 30" damping="2"/>
+          <joint name="right_hip_pitch" type="hinge" axis="0 1 0" range="-120 60" damping="2"/>
+          <geom name="right_thigh_geom" type="capsule" size="0.05" fromto="0 0 0 0 0 -0.3" rgba="0.9 0.5 0.5 1"/>
+
+          <!-- 右膝关节 -->
+          <body name="right_shin" pos="0 0 -0.3">
+            <joint name="right_knee" type="hinge" axis="0 1 0" range="-150 0" damping="1.5"/>
+            <geom name="right_shin_geom" type="capsule" size="0.04" fromto="0 0 0 0 0 -0.3" rgba="0.9 0.5 0.5 1"/>
+
+            <!-- 右踝关节 -->
+            <body name="right_foot" pos="0 0 -0.3">
+              <joint name="right_ankle_pitch" type="hinge" axis="0 1 0" range="-45 45" damping="1"/>
+              <joint name="right_ankle_roll" type="hinge" axis="1 0 0" range="-20 20" damping="1"/>
+              <geom name="right_foot_geom" type="box" size="0.08 0.04 0.02" pos="0.03 0 -0.02" rgba="0.7 0.3 0.3 1" friction="1.2 0.005 0.0001"/>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+
+  <!-- 执行器定义 -->
+  <actuator>
+    <!-- 左腿执行器 -->
+    <motor name="left_hip_yaw_motor" joint="left_hip_yaw" gear="50"/>
+    <motor name="left_hip_roll_motor" joint="left_hip_roll" gear="100"/>
+    <motor name="left_hip_pitch_motor" joint="left_hip_pitch" gear="150"/>
+    <motor name="left_knee_motor" joint="left_knee" gear="150"/>
+    <motor name="left_ankle_pitch_motor" joint="left_ankle_pitch" gear="50"/>
+    <motor name="left_ankle_roll_motor" joint="left_ankle_roll" gear="50"/>
+
+    <!-- 右腿执行器 -->
+    <motor name="right_hip_yaw_motor" joint="right_hip_yaw" gear="50"/>
+    <motor name="right_hip_roll_motor" joint="right_hip_roll" gear="100"/>
+    <motor name="right_hip_pitch_motor" joint="right_hip_pitch" gear="150"/>
+    <motor name="right_knee_motor" joint="right_knee" gear="150"/>
+    <motor name="right_ankle_pitch_motor" joint="right_ankle_pitch" gear="50"/>
+    <motor name="right_ankle_roll_motor" joint="right_ankle_roll" gear="50"/>
+  </actuator>
+
+  <!-- 传感器（可选） -->
+  <sensor>
+    <framequat name="torso_quat" objtype="body" objname="torso"/>
+    <framepos name="torso_pos" objtype="body" objname="torso"/>
+    <gyro name="torso_gyro" site="torso"/>
+    <accelerometer name="torso_acc" site="torso"/>
+  </sensor>
+</mujoco>

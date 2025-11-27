@@ -1,0 +1,70 @@
+# T1机器人强化学习项目依赖清单
+# 适用于Windows系统 + uv包管理器
+# Python 3.10+ required
+
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["t1_robot*"]
+
+[project]
+name = "t1-robot-rl"
+version = "1.0.0"
+description = "T1机器人强化学习训练项目"
+requires-python = ">=3.10"
+
+dependencies = [
+    # 核心依赖
+    "mujoco>=3.0.0",
+    "numpy>=1.24.0,<2.0.0",
+    "torch>=2.0.0",
+
+    # 可视化和工具
+    "opencv-python>=4.8.0",
+    "matplotlib>=3.7.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+# GPU支持 (CUDA 11.8)
+cuda118 = [
+    "torch==2.0.0+cu118",
+]
+
+# GPU支持 (CUDA 12.1)
+cuda121 = [
+    "torch==2.0.0+cu121",
+]
+
+# 日志记录工具
+logging = [
+    "tensorboard>=2.13.0",
+    "wandb>=0.15.0",
+]
+
+# 开发工具
+dev = [
+    "pytest>=7.3.0",
+    "black>=23.3.0",
+    "ruff>=0.1.0",
+]
+
+# 注意：
+# uv安装方式：
+# 1. 基础安装（CPU版本）：
+#    uv pip install -e .
+#
+# 2. GPU版本（CUDA 11.8）：
+#    uv pip install -e .[cuda118] --index-url https://download.pytorch.org/whl/cu118
+#
+# 3. GPU版本（CUDA 12.1）：
+#    uv pip install -e .[cuda121] --index-url https://download.pytorch.org/whl/cu121
+#
+# 4. 包含日志工具：
+#    uv pip install -e .[logging]
+#
+# 5. 开发环境（包含所有工具）：
+#    uv pip install -e .[dev,logging]
