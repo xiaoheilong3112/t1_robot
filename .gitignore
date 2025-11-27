@@ -151,7 +151,9 @@ Thumbs.db
 
 # Logs and checkpoints (keep structure but not actual files)
 logs/*.json
+!logs/final_training_log.json
 checkpoints/*.pt
+!checkpoints/final_model.pt
 
 # MuJoCo temporary files
 *.mjb
@@ -159,7 +161,7 @@ checkpoints/*.pt
 
 # PyTorch model files (except final model for demo)
 # Keep final_model.pt for demonstration but exclude training checkpoints
-checkpoints/model_update_*.pt
+# checkpoints/model_update_*.pt (already excluded by *.pt above)
 
 # Temporary files
 *.tmp

@@ -1,0 +1,92 @@
+[
+  {
+    "timestep": 5120,
+    "n_updates": 5,
+    "mean_episode_reward": -1670.6937991249333,
+    "mean_episode_length": 34.5,
+    "fps": 297.5670260800258,
+    "policy_loss": 105.45222648745403,
+    "value_loss": 123674.742578125,
+    "entropy": 17.88491518497467
+  },
+  {
+    "timestep": 10240,
+    "n_updates": 10,
+    "mean_episode_reward": -1428.4421659709064,
+    "mean_episode_length": 31.58,
+    "fps": 296.0957554629462,
+    "policy_loss": 88.11788666844367,
+    "value_loss": 125679.36176757813,
+    "entropy": 19.03488310575485
+  },
+  {
+    "timestep": 15360,
+    "n_updates": 15,
+    "mean_episode_reward": -2705.059032889259,
+    "mean_episode_length": 62.5,
+    "fps": 294.5472514812879,
+    "policy_loss": 638.6809076745063,
+    "value_loss": 95662.303125,
+    "entropy": 20.474912571907044
+  },
+  {
+    "timestep": 20480,
+    "n_updates": 20,
+    "mean_episode_reward": -1880.350224748436,
+    "mean_episode_length": 53.82,
+    "fps": 290.1131140393823,
+    "policy_loss": 210.76135998368264,
+    "value_loss": 96956.662109375,
+    "entropy": 21.972428417205812
+  },
+  {
+    "timestep": 25600,
+    "n_updates": 25,
+    "mean_episode_reward": -1184.9301047525632,
+    "mean_episode_length": 27.43,
+    "fps": 275.65819482164125,
+    "policy_loss": 125.61611958146095,
+    "value_loss": 77543.39060058593,
+    "entropy": 22.841378104686736
+  },
+  {
+    "timestep": 30720,
+    "n_updates": 30,
+    "mean_episode_reward": -1177.7400919897505,
+    "mean_episode_length": 26.82,
+    "fps": 280.63068695556825,
+    "policy_loss": 257.95419672727587,
+    "value_loss": 50369.27734375,
+    "entropy": 23.742365729808807
+  },
+  {
+    "timestep": 35840,
+    "n_updates": 35,
+    "mean_episode_reward": -2079.5658832145045,
+    "mean_episode_length": 47.37,
+    "fps": 285.4513073176965,
+    "policy_loss": 72.7206121057272,
+    "value_loss": 137785.941796875,
+    "entropy": 24.592444920539855
+  },
+  {
+    "timestep": 40960,
+    "n_updates": 40,
+    "mean_episode_reward": -1743.8575684471593,
+    "mean_episode_length": 39.01,
+    "fps": 288.7978209819955,
+    "policy_loss": 510.8498935610056,
+    "value_loss": 113041.56450195312,
+    "entropy": 25.608909142017364
+  },
+  {
+    "timestep": 46080,
+    "n_updates": 45,
+    "mean_episode_reward": -1212.2562301394175,
+    "mean_episode_length": 23.38,
+    "fps": 291.274132486759,
+    "policy_loss": 246.49511512219905,
+    "value_loss": 93036.69379882813,
+    "entropy": 26.72726854085922
+  }
+]
